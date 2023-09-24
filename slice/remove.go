@@ -1,8 +1,8 @@
 package slice
 
 import (
-	"tekila/internal/common"
-	"tekila/internal/errors"
+	"github.com/gcsdaluo/tekila/internal/common"
+	"github.com/gcsdaluo/tekila/internal/errors"
 )
 
 // RemoveAtIndex 删除指定索引的元素:返回新切片，删除元素，错误处理
