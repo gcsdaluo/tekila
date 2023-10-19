@@ -1,6 +1,7 @@
-package slice
+package test
 
 import (
+	"github.com/gcsdaluo/tekila/slice"
 	"testing"
 )
 
@@ -28,7 +29,7 @@ func TestRemoveAtIndex(t *testing.T) {
 
 	// 执行测试用例
 	for _, tc := range testCases {
-		newSlice, removed, err := RemoveAtIndex(tc.numberSlice, tc.index)
+		newSlice, removed, err := slice.RemoveAtIndex(tc.numberSlice, tc.index)
 
 		// 验证是否有错误发生
 		if (err != nil) != tc.expectErr {
