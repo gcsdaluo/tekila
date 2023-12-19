@@ -1,6 +1,7 @@
 package slice
 
 // ToMap  功能函数--构造泛型map 将src切片slice转化为一个Map
+// map 本身就具备去重功能
 func sToMap[T comparable](src []T) map[T]struct{} {
 	var dataMap = make(map[T]struct{}, len(src))
 	for _, elem := range src {

@@ -2,14 +2,14 @@ package slice
 
 import (
 	"github.com/gcsdaluo/tekila/internal/common"
-	"github.com/gcsdaluo/tekila/internal/errors"
+	"github.com/gcsdaluo/tekila/internal/err"
 )
 
 // RemoveAtIndex 删除指定索引的元素:返回新切片，删除元素，错误处理
 func RemoveAtIndex[T any](src []T, index int) ([]T, T, error) {
 	// 错误处理
 	if index < 0 || index >= len(src) {
-		return nil, common.ZeroValueOfT[T](), errors.ErrIndexOutOfRange(len(src), index)
+		return nil, common.ZeroValueOfT[T](), err.ErrIndexOutOfRange(len(src), index)
 	}
 
 	// 取出index下的元素,使用copy原地删除操作
@@ -27,7 +27,7 @@ func RemoveValue[T comparable](src []T, target T) ([]T, T, error) {
 		}
 	}
 
-	return src, target, errors.NewError("Could not find the specified value")
+	return src, target, err.NewError("Could not find the specified value")
 }
 
 // RemoveAllValue 删除指定值元素(所有指定的元素)
@@ -41,7 +41,7 @@ func RemoveAllValue[T comparable](src []T, target T) ([]T, T, error) {
 		}
 	}
 
-	return result, target, errors.NewError("Could not find the specified value")
+	return result, target, err.NewError("Could not find the specified value")
 }
 
 // FilterRemove 删除满足条件的元素
@@ -66,7 +66,7 @@ func FilterRemove[T any](src []T, condition func(index int, src T) bool) []T {
 // RemoveDuplicates 删除指定重复的元素，仅保留一个副本
 func RemoveDuplicates[T comparable](src []T, target T) ([]T, error) {
 	if len(src) == 0 {
-		return nil, errors.NewError("The slice are empty")
+		return nil, err.NewError("The slice are empty")
 	}
 
 	// 设置标志位和新的切片数组
@@ -89,7 +89,7 @@ func RemoveDuplicates[T comparable](src []T, target T) ([]T, error) {
 // RemoveAllDuplicates 删除所有重复的元素，仅保留一个副本
 func RemoveAllDuplicates[T comparable](src []T) ([]T, error) {
 	if len(src) == 0 {
-		return nil, errors.NewError("The slice are empty")
+		return nil, err.NewError("The slice are empty")
 	}
 
 	// 设置每个重复元素对应的map标志为和切片数组
@@ -109,7 +109,7 @@ func RemoveAllDuplicates[T comparable](src []T) ([]T, error) {
 // RemoveRangeAtIndex 删除位于给定索引范围内的元素
 func RemoveRangeAtIndex[T any](src []T, start, end int) ([]T, []T, error) {
 	if start < 0 || end >= len(src) || start > end {
-		return nil, nil, errors.NewError("Invalid index range")
+		return nil, nil, err.NewError("Invalid index range")
 	}
 
 	removed := src[start : end+1]
